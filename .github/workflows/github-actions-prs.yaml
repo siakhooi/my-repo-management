@@ -1,4 +1,4 @@
-name: Dependabot: Github Actions 
+name: "Dependabot: Github Actions" 
 
 on:
   schedule:
