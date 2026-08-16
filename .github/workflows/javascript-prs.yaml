@@ -14,6 +14,6 @@ jobs:
           node-version: 24
 
       - run: npm install -g @siakhooi/gh-pr
-      - run: gh-pr list --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed -l 10 --label javascript
+      - run: gh-pr autoreview --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed --limit 10 --label javascript --max-update 1 --max-update-per-repo 1
         env:
           GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}

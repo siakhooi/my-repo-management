@@ -13,3 +13,7 @@ go:
     gh-pr list --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed -l 10 --label go
 devcontainer:
     gh-pr list --assigned-to-me --authored-by-renovate --requested-my-review --not-yet-reviewed -l 10 --repo siakhooi/devcontainers
+
+install:
+    npm install -g @siakhooi/gh-pr
+    gh-pr -V
