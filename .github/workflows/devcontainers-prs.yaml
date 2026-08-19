@@ -2,8 +2,8 @@ name: "Renovate: devcontainers"
 
 on:
   schedule:
-    - cron: '0 10 * * *'
-    - cron: '0 14 * * *'
+    - cron: '0 12 * * *'
+    - cron: '0 0 * * *'
   workflow_dispatch:
     inputs: 
       action:
@@ -17,7 +17,7 @@ on:
 jobs:
   auto-review:
     if: |
-      (github.event_name == 'schedule' && github.event.schedule=='0 10 * * *') ||
+      (github.event_name == 'schedule' && github.event.schedule=='0 12 * * *') ||
       (github.event_name == 'workflow_dispatch' && inputs.action == 'autoreview')
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +32,7 @@ jobs:
 
   auto-merge:
     if: |
-      (github.event_name == 'schedule' && github.event.schedule=='0 14 * * *') ||
+      (github.event_name == 'schedule' && github.event.schedule=='0 0 * * *') ||
       (github.event_name == 'workflow_dispatch' && inputs.action == 'automerge')
     runs-on: ubuntu-latest
     steps:

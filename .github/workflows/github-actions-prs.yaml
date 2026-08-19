@@ -2,8 +2,8 @@ name: "Dependabot: Github Actions"
 
 on:
   schedule:
-    - cron: '0 22 * * *'
-    - cron: '0 2 * * *'
+    - cron: '0 13 * * *'
+    - cron: '0 1 * * *'
   workflow_dispatch:
     inputs: 
       action:
@@ -17,7 +17,7 @@ on:
 jobs:
   auto-review:
     if: |
-      (github.event_name == 'schedule' && github.event.schedule=='0 22 * * *') ||
+      (github.event_name == 'schedule' && github.event.schedule=='0 13 * * *') ||
       (github.event_name == 'workflow_dispatch' && inputs.action == 'autoreview')
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +32,7 @@ jobs:
 
   auto-merge:
     if: |
-      (github.event_name == 'schedule' && github.event.schedule=='0 2 * * *') ||
+      (github.event_name == 'schedule' && github.event.schedule=='0 1 * * *') ||
       (github.event_name == 'workflow_dispatch' && inputs.action == 'automerge')
     runs-on: ubuntu-latest
     steps:
