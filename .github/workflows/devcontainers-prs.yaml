@@ -26,7 +26,13 @@ jobs:
           node-version: 24
 
       - run: npm install -g @siakhooi/gh-pr
-      - run: gh-pr autoreview --assigned-to-me --authored-by-renovate --requested-my-review --not-yet-reviewed --limit 10 --repo siakhooi/devcontainers --max-update 1 --max-update-per-repo 1
+      - run: |
+          gh-pr autoreview --assigned-to-me --authored-by-renovate \
+          --requested-my-review --not-yet-reviewed \
+          --repo siakhooi/devcontainers \
+          --limit 10 \
+          --max-update 1 \
+          --max-update-per-repo 1
         env:
           GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
 
@@ -41,6 +47,11 @@ jobs:
           node-version: 24
 
       - run: npm install -g @siakhooi/gh-pr
-      - run: gh-pr automerge --assigned-to-me --authored-by-renovate --limit 10 --repo siakhooi/devcontainers --max-update 1 --max-update-per-repo 1
+      - run: |
+          gh-pr automerge --assigned-to-me --authored-by-renovate \
+          --repo siakhooi/devcontainers \
+          --limit 10 \
+          --max-update 1 \
+          --max-update-per-repo 1
         env:
           GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
