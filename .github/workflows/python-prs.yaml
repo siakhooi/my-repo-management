@@ -14,6 +14,12 @@ on:
           - autoreview
           - automerge
 
+env:
+  AUTOREVIEW_LIMIT: 10
+  AUTOREVIEW_MAX_UPDATE: 5
+  AUTOMERGE_LIMIT: 10
+  AUTOMERGE_MAX_UPDATE: 5
+
 jobs:
   auto-review:
     if: |
@@ -29,8 +35,8 @@ jobs:
       - run: |
           gh-pr autoreview --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed \
           --label python \
-          --limit 10 \
-          --max-update 5 \
+          --limit "$AUTOREVIEW_LIMIT" \
+          --max-update "$AUTOREVIEW_MAX_UPDATE" \
           --max-update-per-repo 1
         env:
           GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
@@ -49,8 +55,8 @@ jobs:
       - run: |
           gh-pr automerge --assigned-to-me --authored-by-dependabot --label dependencies \
           --label python \
-          --limit 10 \
-          --max-update 5 \
+          --limit "$AUTOMERGE_LIMIT" \
+          --max-update "$AUTOMERGE_MAX_UPDATE" \
           --max-update-per-repo 1
         env:
           GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
