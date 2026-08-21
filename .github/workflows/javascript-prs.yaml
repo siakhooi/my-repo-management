@@ -2,8 +2,10 @@ name: "Dependabot: javascript"
 
 on:
   schedule:
-    - cron: '0 16 * * *'
-    - cron: '0 4 * * *'
+    - cron: '23 16 * * *'
+      timezone: 'Asia/Kuala_Lumpur'
+    - cron: '23 4 * * *'
+      timezone: 'Asia/Kuala_Lumpur'
   workflow_dispatch:
     inputs: 
       action:
@@ -15,15 +17,15 @@ on:
           - automerge
 
 env:
-  AUTOREVIEW_LIMIT: 10
+  AUTOREVIEW_LIMIT: 20
   AUTOREVIEW_MAX_UPDATE: 4
-  AUTOMERGE_LIMIT: 10
+  AUTOMERGE_LIMIT: 20
   AUTOMERGE_MAX_UPDATE: 4
 
 jobs:
   auto-review:
     if: |
-      (github.event_name == 'schedule' && github.event.schedule=='0 16 * * *') ||
+      (github.event_name == 'schedule' && github.event.schedule=='23 16 * * *') ||
       (github.event_name == 'workflow_dispatch' && inputs.action == 'autoreview')
     runs-on: ubuntu-latest
     steps:
@@ -43,7 +45,7 @@ jobs:
 
   auto-merge:
     if: |
-      (github.event_name == 'schedule' && github.event.schedule=='0 4 * * *') ||
+      (github.event_name == 'schedule' && github.event.schedule=='23 4 * * *') ||
       (github.event_name == 'workflow_dispatch' && inputs.action == 'automerge')
     runs-on: ubuntu-latest
     steps:
