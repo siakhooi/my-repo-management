@@ -2,8 +2,10 @@ name: "Dependabot: python"
 
 on:
   schedule:
-    - cron: '0 17 * * *'
-    - cron: '0 5 * * *'
+    - cron: '23 17 * * *'
+      timezone: 'Asia/Kuala_Lumpur'
+    - cron: '23 5 * * *'
+      timezone: 'Asia/Kuala_Lumpur'
   workflow_dispatch:
     inputs: 
       action:
@@ -23,7 +25,7 @@ env:
 jobs:
   auto-review:
     if: |
-      (github.event_name == 'schedule' && github.event.schedule=='0 17 * * *') ||
+      (github.event_name == 'schedule' && github.event.schedule=='23 17 * * *') ||
       (github.event_name == 'workflow_dispatch' && inputs.action == 'autoreview')
     runs-on: ubuntu-latest
     steps:
@@ -43,7 +45,7 @@ jobs:
 
   auto-merge:
     if: |
-      (github.event_name == 'schedule' && github.event.schedule=='0 5 * * *') ||
+      (github.event_name == 'schedule' && github.event.schedule=='23 5 * * *') ||
       (github.event_name == 'workflow_dispatch' && inputs.action == 'automerge')
     runs-on: ubuntu-latest
     steps:
