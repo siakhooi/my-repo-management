@@ -2,7 +2,7 @@ name: "Dependabot: Github Actions"
 
 on:
   schedule:
-    - cron: '23 13,19 * * *'
+    - cron: '23 4 * * *'
       timezone: 'Asia/Kuala_Lumpur'
     - cron: '23 1,7 * * *'
       timezone: 'Asia/Kuala_Lumpur'
@@ -19,13 +19,14 @@ on:
 env:
   AUTOREVIEW_LIMIT: 20
   AUTOREVIEW_MAX_UPDATE: 5
+  AUTOREVIEW_MAX_UPDATE_PER_REPO: 2
   AUTOMERGE_LIMIT: 20
   AUTOMERGE_MAX_UPDATE: 5
 
 jobs:
   auto-review:
     if: |
-      (github.event_name == 'schedule' && github.event.schedule=='23 13,19 * * *') ||
+      (github.event_name == 'schedule' && github.event.schedule=='23 4 * * *') ||
       (github.event_name == 'workflow_dispatch' && inputs.action == 'autoreview')
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +40,7 @@ jobs:
           --label github_actions \
           --limit "$AUTOREVIEW_LIMIT" \
           --max-update "$AUTOREVIEW_MAX_UPDATE" \
-          --max-update-per-repo 1
+          --max-update-per-repo "$AUTOREVIEW_MAX_UPDATE_PER_REPO"
         env:
           GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
 

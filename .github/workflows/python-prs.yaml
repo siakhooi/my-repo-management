@@ -2,7 +2,7 @@ name: "Dependabot: python"
 
 on:
   schedule:
-    - cron: '23 17 * * *'
+    - cron: '23 7 * * *'
       timezone: 'Asia/Kuala_Lumpur'
     - cron: '23 5 * * *'
       timezone: 'Asia/Kuala_Lumpur'
@@ -25,7 +25,7 @@ env:
 jobs:
   auto-review:
     if: |
-      (github.event_name == 'schedule' && github.event.schedule=='23 17 * * *') ||
+      (github.event_name == 'schedule' && github.event.schedule=='23 7 * * *') ||
       (github.event_name == 'workflow_dispatch' && inputs.action == 'autoreview')
     runs-on: ubuntu-latest
     steps:
