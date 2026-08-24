@@ -2,9 +2,9 @@ name: "Dependabot: python"
 
 on:
   schedule:
-    - cron: '23 7 * * *'
+    - cron: '37 6 * * *'
       timezone: 'Asia/Kuala_Lumpur'
-    - cron: '23 5 * * *'
+    - cron: '37 4,8 * * *'
       timezone: 'Asia/Kuala_Lumpur'
   workflow_dispatch:
     inputs: 
@@ -17,15 +17,16 @@ on:
           - automerge
 
 env:
-  AUTOREVIEW_LIMIT: 10
-  AUTOREVIEW_MAX_UPDATE: 5
-  AUTOMERGE_LIMIT: 10
+  AUTOREVIEW_LIMIT: 20
+  AUTOREVIEW_MAX_UPDATE: 10
+  AUTOREVIEW_MAX_UPDATE_PER_REPO: 2
+  AUTOMERGE_LIMIT: 20
   AUTOMERGE_MAX_UPDATE: 5
 
 jobs:
   auto-review:
     if: |
-      (github.event_name == 'schedule' && github.event.schedule=='23 7 * * *') ||
+      (github.event_name == 'schedule' && github.event.schedule=='37 6 * * *') ||
       (github.event_name == 'workflow_dispatch' && inputs.action == 'autoreview')
     runs-on: ubuntu-latest
     steps:
@@ -39,13 +40,13 @@ jobs:
           --label python \
           --limit "$AUTOREVIEW_LIMIT" \
           --max-update "$AUTOREVIEW_MAX_UPDATE" \
-          --max-update-per-repo 1
+          --max-update-per-repo "$AUTOREVIEW_MAX_UPDATE_PER_REPO"
         env:
           GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
 
   auto-merge:
     if: |
-      (github.event_name == 'schedule' && github.event.schedule=='23 5 * * *') ||
+      (github.event_name == 'schedule' && github.event.schedule=='37 4,8 * * *') ||
       (github.event_name == 'workflow_dispatch' && inputs.action == 'automerge')
     runs-on: ubuntu-latest
     steps:
