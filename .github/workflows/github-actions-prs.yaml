@@ -41,6 +41,19 @@ jobs:
           --limit "$AUTOREVIEW_LIMIT" \
           --max-update "$AUTOREVIEW_MAX_UPDATE" \
           --max-update-per-repo "$AUTOREVIEW_MAX_UPDATE_PER_REPO"
+
+          gh-pr autoreview --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed \
+          --label github_actions --allow-no-checks --repo siakhooi/devcontainers \
+          -l 5 --max-update 5 --max-update-per-repo 5
+
+          gh-pr autoreview --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed \
+          --label github_actions --allow-no-checks --repo siakhooi/rpms \
+          -l 5 --max-update 5 --max-update-per-repo 5
+
+          gh-pr autoreview --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed \
+          --label github_actions --allow-no-checks --repo siakhooi/helm-charts \
+          -l 5 --max-update 5 --max-update-per-repo 5
+
         env:
           GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
 
