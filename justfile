@@ -20,7 +20,7 @@ install:
 
 devcontainer-autoreview:
     gh-pr autoreview --dry-run --assigned-to-me --authored-by-renovate --requested-my-review --not-yet-reviewed --repo siakhooi/devcontainers -l 20 --max-update 5 --max-update-per-repo 5
-github_actions-autoreview:
+github-actions-autoreview:
     gh-pr autoreview --dry-run --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed --label github_actions -l 20 --max-update 5 --max-update-per-repo 2
 go-autoreview:
     gh-pr autoreview --dry-run --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed --label go -l 10 --max-update 6 --max-update-per-repo 2
@@ -33,7 +33,7 @@ python-autoreview:
          
 devcontainer-automerge:
     gh-pr automerge --dry-run --assigned-to-me --authored-by-renovate --repo siakhooi/devcontainers -l 10 --max-update 1 --max-update-per-repo 1
-github_actions-automerge:
+github-actions-automerge:
     gh-pr automerge --dry-run --assigned-to-me --authored-by-dependabot --label dependencies --label github_actions -l 20 --max-update 5 --max-update-per-repo 1
 go-automerge:
     gh-pr automerge --dry-run --assigned-to-me --authored-by-dependabot --label dependencies --label go -l 10 --max-update 3 --max-update-per-repo 1
@@ -44,9 +44,16 @@ javascript-automerge:
 python-automerge:
     gh-pr automerge --dry-run --assigned-to-me --authored-by-dependabot --label dependencies --label python -l 20 --max-update 5 --max-update-per-repo 1
 
-github_actions-autoreview-devcontainers:
+github-actions-autoreview-devcontainers:
     gh-pr autoreview --dry-run --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed --label github_actions --allow-no-checks --repo siakhooi/devcontainers -l 5 --max-update 5 --max-update-per-repo 5
-github_actions-autoreview-rpms:
+github-actions-autoreview-rpms:
     gh-pr autoreview --dry-run --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed --label github_actions --allow-no-checks --repo siakhooi/rpms -l 5 --max-update 5 --max-update-per-repo 5
-github_actions-autoreview-helm-charts:
+github-actions-autoreview-helm-charts:
     gh-pr autoreview --dry-run --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed --label github_actions --allow-no-checks --repo siakhooi/helm-charts -l 5 --max-update 5 --max-update-per-repo 5
+
+github-actions-automerge-devcontainers:
+    gh-pr automerge --dry-run --assigned-to-me --authored-by-dependabot --label dependencies --label github_actions --allow-no-checks --repo siakhooi/devcontainers -l 20 --max-update 5 --max-update-per-repo 1
+github-actions-automerge-rpms:
+    gh-pr automerge --dry-run --assigned-to-me --authored-by-dependabot --label dependencies --label github_actions --allow-no-checks --repo siakhooi/rpms -l 20 --max-update 5 --max-update-per-repo 1
+github-actions-automerge-helm-charts:
+    gh-pr automerge --dry-run --assigned-to-me --authored-by-dependabot --label dependencies --label github_actions --allow-no-checks --repo siakhooi/helm-charts -l 20 --max-update 5 --max-update-per-repo 1

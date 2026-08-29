@@ -35,25 +35,37 @@ jobs:
           node-version: 24
 
       - run: npm install -g @siakhooi/gh-pr
-      - run: |
+      - name: All github actions with checks
+        run: |
           gh-pr autoreview --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed \
           --label github_actions \
           --limit "$AUTOREVIEW_LIMIT" \
           --max-update "$AUTOREVIEW_MAX_UPDATE" \
           --max-update-per-repo "$AUTOREVIEW_MAX_UPDATE_PER_REPO"
+        env:
+          GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
 
+      - name: "github actions without checks: devcontainers"
+        run: |
           gh-pr autoreview --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed \
           --label github_actions --allow-no-checks --repo siakhooi/devcontainers \
           -l 5 --max-update 5 --max-update-per-repo 5
+        env:
+          GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
 
+      - name: "github actions without checks: rpms"
+        run: |
           gh-pr autoreview --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed \
           --label github_actions --allow-no-checks --repo siakhooi/rpms \
           -l 5 --max-update 5 --max-update-per-repo 5
+        env:
+          GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
 
+      - name: "github actions without checks: helm-charts"
+        run: |
           gh-pr autoreview --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed \
           --label github_actions --allow-no-checks --repo siakhooi/helm-charts \
           -l 5 --max-update 5 --max-update-per-repo 5
-
         env:
           GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
 
@@ -68,11 +80,36 @@ jobs:
           node-version: 24
 
       - run: npm install -g @siakhooi/gh-pr
-      - run: |
+      - name: All github actions with checks
+        run: |
           gh-pr automerge --assigned-to-me --authored-by-dependabot --label dependencies \
           --label github_actions \
           --limit "$AUTOMERGE_LIMIT" \
           --max-update "$AUTOMERGE_MAX_UPDATE" \
           --max-update-per-repo 1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
+
+      - name: "github actions without checks: devcontainers"
+        run: |
+          gh-pr automerge --assigned-to-me --authored-by-dependabot --label dependencies \
+          --label github_actions --allow-no-checks --repo siakhooi/devcontainers \
+          -l 5 --max-update 1 --max-update-per-repo 1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
+
+      - name: "github actions without checks: rpms"
+        run: |
+          gh-pr automerge --assigned-to-me --authored-by-dependabot --label dependencies \
+          --label github_actions --allow-no-checks --repo siakhooi/rpms \
+          -l 5 --max-update 1 --max-update-per-repo 1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
+
+      - name: "github actions without checks: helm-charts"
+        run: |
+          gh-pr automerge --assigned-to-me --authored-by-dependabot --label dependencies \
+          --label github_actions --allow-no-checks --repo siakhooi/helm-charts \
+          -l 5 --max-update 1 --max-update-per-repo 1
         env:
           GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
