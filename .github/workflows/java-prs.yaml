@@ -2,19 +2,9 @@ name: "Dependabot: java"
 
 on:
   schedule:
-    - cron: '23 5 * * *'
-      timezone: 'Asia/Kuala_Lumpur'
-    - cron: '23 3,7 * * *'
+    - cron: '23 3,5,7 * * *'
       timezone: 'Asia/Kuala_Lumpur'
   workflow_dispatch:
-    inputs: 
-      action:
-        description: Action to run
-        required: true
-        type: choice
-        options: 
-          - autoreview
-          - automerge
 
 env:
   AUTOREVIEW_LIMIT: 10
@@ -24,42 +14,32 @@ env:
   AUTOMERGE_MAX_UPDATE: 4
 
 jobs:
-  auto-review:
-    if: |
-      (github.event_name == 'schedule' && github.event.schedule=='23 5 * * *') ||
-      (github.event_name == 'workflow_dispatch' && inputs.action == 'autoreview')
+  auto-process:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 24
 
-      - run: npm install -g @siakhooi/gh-pr
-      - run: |
-          gh-pr autoreview --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed \
-          --label java \
-          --limit "$AUTOREVIEW_LIMIT" \
-          --max-update "$AUTOREVIEW_MAX_UPDATE" \
-          --max-update-per-repo "$AUTOREVIEW_MAX_UPDATE_PER_REPO"
-        env:
-          GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
+      - name: "Install gh-pr"
+        run: npm install -g @siakhooi/gh-pr
 
-  auto-merge:
-    if: |
-      (github.event_name == 'schedule' && github.event.schedule=='23 3,7 * * *') ||
-      (github.event_name == 'workflow_dispatch' && inputs.action == 'automerge')
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version: 24
-
-      - run: npm install -g @siakhooi/gh-pr
-      - run: |
+      - name: "Auto Merge"
+        run: |
           gh-pr automerge --assigned-to-me --authored-by-dependabot --label dependencies \
           --label java \
           --limit "$AUTOMERGE_LIMIT" \
           --max-update "$AUTOMERGE_MAX_UPDATE" \
           --max-update-per-repo 1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
+
+      - name: "Auto Review: All checks"
+        run: |
+          gh-pr autoreview --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed \
+          --label java \
+          --limit "$AUTOREVIEW_LIMIT" \
+          --max-update "$AUTOREVIEW_MAX_UPDATE" \
+          --max-update-per-repo "$AUTOREVIEW_MAX_UPDATE_PER_REPO"
         env:
           GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
