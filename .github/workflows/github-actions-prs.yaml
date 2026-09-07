@@ -74,6 +74,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
 
+      - name: "Auto Merge: book-covers"
+        run: |
+          gh-pr automerge --assigned-to-me --authored-by-dependabot --label dependencies \
+          --label github_actions --allow-no-checks --repo siakhooi/book-covers \
+          -l 5 --max-update 1 --max-update-per-repo 1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
+
       - name: "Auto Review: All checks"
         run: |
           gh-pr autoreview --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed \
@@ -120,6 +128,14 @@ jobs:
         run: |
           gh-pr autoreview --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed \
           --label github_actions --allow-no-checks --repo siakhooi/helm-charts \
+          -l 5 --max-update 5 --max-update-per-repo 5
+        env:
+          GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
+
+      - name: "Auto Review: book-covers"
+        run: |
+          gh-pr autoreview --assigned-to-me --authored-by-dependabot --label dependencies --not-yet-reviewed \
+          --label github_actions --allow-no-checks --repo siakhooi/book-covers \
           -l 5 --max-update 5 --max-update-per-repo 5
         env:
           GITHUB_TOKEN: ${{ secrets.ALL_REPO_GITHUB_TOKEN }}
