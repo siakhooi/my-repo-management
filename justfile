@@ -57,3 +57,15 @@ github-actions-automerge-rpms:
     gh-pr automerge --dry-run --assigned-to-me --authored-by-dependabot --label dependencies --label github_actions --allow-no-checks --repo siakhooi/rpms -l 20 --max-update 5 --max-update-per-repo 1
 github-actions-automerge-helm-charts:
     gh-pr automerge --dry-run --assigned-to-me --authored-by-dependabot --label dependencies --label github_actions --allow-no-checks --repo siakhooi/helm-charts -l 20 --max-update 5 --max-update-per-repo 1
+
+run workflow:
+    gh workflow run {{ workflow }}-prs.yaml
+
+run-dc:
+    just run devcontainers
+run-ga:
+    just run github-actions
+run-js:
+    just run javascript
+run-py:
+    just run python
