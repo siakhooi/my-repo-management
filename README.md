@@ -1,5 +1,8 @@
 # my-repo-management
+
 special repo to manage my github repos
+- auto review & merge dependabot pull requests
+- auto review & merge renovate pull requests
 
 ## Badges
 ![License](https://img.shields.io/github/license/siakhooi/my-repo-management?logo=github)
