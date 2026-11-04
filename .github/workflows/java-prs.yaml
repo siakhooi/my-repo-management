@@ -2,7 +2,7 @@ name: "Dependabot: java"
 
 on:
   schedule:
-    - cron: '23 3,5,7 * * *'
+    - cron: '23 3,9,15,21 * * *'
       timezone: 'Asia/Kuala_Lumpur'
   workflow_dispatch:
 

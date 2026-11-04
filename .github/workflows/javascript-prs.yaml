@@ -2,7 +2,7 @@ name: "Dependabot: javascript"
 
 on:
   schedule:
-    - cron: '23 2,4,6 * * *'
+    - cron: '23 4,10,16,22 * * *'
       timezone: 'Asia/Kuala_Lumpur'
   workflow_dispatch:
 

@@ -2,7 +2,7 @@ name: "Dependabot: python"
 
 on:
   schedule:
-    - cron: '37 3,5,7 * * *'
+    - cron: '23 5,11,17,23 * * *'
       timezone: 'Asia/Kuala_Lumpur'
   workflow_dispatch:
 

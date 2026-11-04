@@ -2,7 +2,7 @@ name: "Dependabot: Go"
 
 on:
   schedule:
-    - cron: '23 2,4,6 * * *'
+    - cron: '23 2,8,14,20 * * *'
       timezone: 'Asia/Kuala_Lumpur'
   workflow_dispatch:
 

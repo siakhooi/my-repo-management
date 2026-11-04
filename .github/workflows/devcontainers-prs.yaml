@@ -2,7 +2,7 @@ name: "Renovate: devcontainers"
 
 on:
   schedule:
-    - cron: '23 0,3,6 * * *'
+    - cron: '23 0,6,12,18 * * *'
       timezone: 'Asia/Kuala_Lumpur'
   workflow_dispatch:
 
